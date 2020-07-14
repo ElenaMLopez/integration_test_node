@@ -19,3 +19,5 @@ app.post('/', authentication, postsHandlers.post); // Solo haremos la parte de l
 app.listen(port, function () {
   console.log(`App listening on port ${port}!`);
 });
+
+module.exports = app; // Exportado para testear con SuperTest

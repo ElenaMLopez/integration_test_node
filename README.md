@@ -40,7 +40,48 @@ Un test de integración prueba el flujo entre las unidades, si es correcto pasar
 npm install --save-dev supertest
 ```
 
-Tras ello, creamos el archivo `index.test.js` en el que vamos a realizar el test de integración. Primero importamos supertest, y creamos la instancia:
+Tras ello, creamos el archivo `/endopoints/posts/index.test.js` en el que vamos a realizar el test de integración. Primero importamos supertest, y app para testearla:
 
 ```js
+const supertest = require('supertest');
+const app = require('../../../server');
+```
+
+Para poder importar `app` es necesario exportarla desde el archivo de `server.js`. Así que agregamos al final el export del módulo:
+
+```js
+module.exports = app;
+```
+
+A continuación empezamos con los describe de nuestro test. Vamos a testear el server, y dentro de este el endpoint de posts:
+
+```js
+const request = require('supertest');
+const app = require('../../../server');
+
+describe('Server', () => {
+  describe('Endpoints', () => {
+    describe('post a entrance at Posts routes', () => {
+      it('Creates a new post', () => {  // Test para el caso de éxito
+      const response = await request(app)
+          .post('/')
+          .send({ userId: 5 })
+          .set('user_id', 1)
+          .set('Content-Type', 'application/json');
+        expect(response.statusCode).toEqual(201);
+        expect(response.body.userId).toEqual(5);
+        expect(response.body).toHaveProperty('id'); // Como el id del post va a ser variable, podemos
+              // testear que recibe esa propiedad en la respuesta con este método en ved de su valor
+      });
+      it('Creates a new post', async () => { // Test para caso de error
+        const response = await request(app)
+          .post('/')
+          .send({ userId: 100 })
+          .set('user_id', 1)
+          .set('Content-Type', 'application/json');
+        expect(response.statusCode).toEqual(400);
+      });
+    });
+  });
+});
 ```
