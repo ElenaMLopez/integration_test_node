@@ -85,3 +85,13 @@ describe('Server', () => {
   });
 });
 ```
+
+---
+
+## Levantar el servidor
+
+Puede levantarse un servidor con el comando `npm run serve`. Esto levanta el servidor con nodemon, de forma que reacciona a los cambios guardados en los archivos.
+
+## Realizar los test
+
+Para realizar los test, basta con lanzar el comando `npm run test`. Esto lanzará los test unitarios y el test de integración.
