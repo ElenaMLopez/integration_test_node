@@ -33,3 +33,14 @@ app.listen(port, function () {
 ```
 
 Este tipo de errores son los que los test de integración sacarán a la luz.
+
+Un test de integración prueba el flujo entre las unidades, si es correcto pasará y si no arrojará un error, pudiendo de esta forma confirmar si nuestro flujo es correcto. Para realizar este tipo de test, se va a utilizar otra librería llamada [supertest](https://www.npmjs.com/package/supertest), que utiliza [Mocha](https://mochajs.org/) por debajo. Se instalará como dependencia de desarrollo:
+
+```bash
+npm install --save-dev supertest
+```
+
+Tras ello, creamos el archivo `index.test.js` en el que vamos a realizar el test de integración. Primero importamos supertest, y creamos la instancia:
+
+```js
+```
